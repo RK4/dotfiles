@@ -3,13 +3,22 @@ alias hs="history | grep "
 alias pss="ps -aux | grep"
 
 alias sv="ssh root@10.0.8.81"
-alias dev_81=root@10.0.8.81
+
+export d_81=root@10.0.8.81
 
 # Run Commnads starting with x to copy the output to clipboard
 alias x=xlicp_copy
 
 function xlicp_copy()
 {
-    $@ |xclip -selection c
+    $@ | xclip -selection c
 }
 
+function mem_monitor()
+{
+    while true
+    do
+        sudo python ~/.util/ps_mem.py  2>&1 | grep $1
+        sleep $2
+    done
+}
