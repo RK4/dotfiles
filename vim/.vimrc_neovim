@@ -357,7 +357,6 @@ if g:vim_bootstrap_editor == 'nvim'
 else
   nnoremap <silent> <leader>sh :VimShellCreate<CR>
 endif
-
 "*****************************************************************************
 "" Custom
 "*****************************************************************************
@@ -383,14 +382,20 @@ vmap <S-Right> j
 
 " Press ctrl-left to move to next Tab
 "":map <c-left> <ESC>:tabp<CR>
-:map <TAB> <ESC>:tabn<CR>
+map <TAB> <ESC>:tabn<CR>
 "":map <C-Right> <ESC>:tabn<CR>
-:map <c-m> <ESC>:tabe<CR><c-n> 
-:map <c-o> <ESC>:tabe  
+map <c-m> <ESC>:tabe<CR><c-n> 
+map <c-o> <ESC>:tabe  
 
 " Replace jj with ESC
-:imap jj <Esc>
-:nmap jj <Esc><Insert>
+imap jj <Esc>
+nmap jj <Esc><Insert>
+imap ..  <Esc>
+nmap .. <Esc><Insert>
+nmap ,,  <Esc>v
+vmap ,, <Esc><Insert>
+imap ,,  <Esc>v
+
 nmap <silent> <A-Up> :wincmd k<CR>
 nmap <silent> <A-Down> :wincmd j<CR>
 nmap <silent> <A-Left> :wincmd h<CR>
@@ -410,33 +415,36 @@ map ^[^[[C <A-Left>
 " Ctrl + S to save
 map <C-S> <ESC>:w<CR>
 " Ctrl + E to exit
-:map <c-e> jj<ESC>:wq<CR>
+map <c-e> jj<ESC>:wq<CR>
 
-:map <c-f> <ESC>:F %
+" Ctrl + f to find
+map <c-f> <ESC>:F %
 
-:map <CR> <ESC>:
+map <CR> <ESC>:
 
 "nnoremap <CR> <NOP> 
 
 " CTRL-X and SHIFT-Del are Cut
-vnoremap <c-x> :"+x
+vnoremap <c-x> "+x <Esc><Insert>
 vnoremap <S-Del> "+x
 
 " CTRL-C and CTRL-Insert are Copy
-vnoremap <c-c> "+y
-vnoremap <C-Insert> "+y
+vnoremap <c-c> "+y <Esc><Insert>
+vnoremap <C-Insert> "+y <Esc><Insert>
 
-" CTRL-V and SHIFT-Insert are Paste
+" CTRL-V and SHIFT-Insert are Paste; g cursor
 map <C-V> "+gP
 map <S-Insert> "+gP
+
+imap <C-V> <C-R>+
 
 cmap <C-V> <C-R>+
 cmap <S-Insert> <C-R>+
 
- "Do
+"Do
 map <c-d> <ESC>:Do 
 
-source /root/.vim/cscope.vim
+source ~/.vim/cscope.vim
 "*****************************************************************************
 "" Functions
 "*****************************************************************************

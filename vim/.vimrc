@@ -390,7 +390,7 @@ imap jj <Esc>
 nmap jj <Esc><Insert>
 imap ..  <Esc>
 nmap .. <Esc><Insert>
-map ,,  <Esc>v
+nmap ,,  <Esc>v
 vmap ,, <Esc><Insert>
 imap ,,  <Esc>v
 
