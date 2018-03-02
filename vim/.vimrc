@@ -28,9 +28,9 @@ endif
 " Required:
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
- 
+
 Plugin 'VundleVim/Vundle.vim'
- 
+
 
 "*****************************************************************************
 "" Plug install packages
@@ -64,15 +64,14 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
-" Gvim 
+" Gvim
 Plugin 'vim-scripts/CSApprox'
 
 " Trailing spaces
-Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'ntpeters/vim-better-whitespace'
 
 " Closing in insert mode
 Plugin 'Raimondi/delimitMate'
-
 
 " Syntax Checking
 Plugin 'scrooloose/syntastic'
@@ -91,7 +90,7 @@ if isdirectory('/usr/local/opt/fzf')
 else
   Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
   Plugin 'junegunn/fzf.vim'
-  " Make some 
+  " Make some
 endif
 
 let g:make = 'gmake'
@@ -361,88 +360,106 @@ endif
 set  mouse=a
 
 set pastetoggle=<F3>
-
-" activate visual mode in normal mode
-nmap <S-Up> v
-nmap <S-Down> v
-
-" these are mapped in visual mode
-vmap <S-Up> k
-vmap <S-Down> j
-
-" activate visual mode in normal mode
-nmap <S-Left>> v
-nmap <S-Right>  v
-
-" these are mapped in visual mode
-vmap <S-Left> k
-vmap <S-Right> j
-
-" Press ctrl-left to move to next Tab
-"":map <c-left> <ESC>:tabp<CR>
+" Press TAB to move to next Tab
 map <TAB> <ESC>:tabn<CR>
-"":map <C-Right> <ESC>:tabn<CR>
-map <c-m> <ESC>:tabe<CR><c-n> 
-map <c-o> <ESC>:tabe  
 
-" Replace jj with ESC
-imap jj <Esc>
-nmap jj <Esc><Insert>
-imap ..  <Esc>
-nmap .. <Esc><Insert>
-nmap ,,  <Esc>v
-vmap ,, <Esc><Insert>
-imap ,,  <Esc>v
-
-nmap <silent> <A-Up> :wincmd k<CR>
-nmap <silent> <A-Down> :wincmd j<CR>
-nmap <silent> <A-Left> :wincmd h<CR>
-nmap <silent> <A-Right> :wincmd l<CR>
-
-nmap <silent> tt :wincmd k<CR>
-nmap <silent> gg :wincmd j<CR>
-nmap <silent> ff  :wincmd h<CR>
-nmap <silent> hh :wincmd l<CR>
-
-map ^[[1;3A <A-Up>
-map ^[[1;3B <A-Down>
-map ^[^[[D <A-Right>
-map ^[^[[C <A-Left>
-
+"map <C-Right> <ESC>:tabn<CR>
+map <c-m> <ESC>:tabe<CR><c-n>
+map <c-o> <ESC>:tabe
 
 " Ctrl + S to save
-map <C-S> <ESC>:w<CR>
+map <c-s> <ESC>:w<CR>
 " Ctrl + E to exit
 map <c-e> jj<ESC>:wq<CR>
 
 " Ctrl + f to find
-map <c-f> <ESC>:F %
+map <c-f>        <ESC>:F %
+map <c-r>        <ESC>:Far %
+map <c-f><c-f>   <Esc>:Fardo<CR>
 
 map <CR> <ESC>:
 
-"nnoremap <CR> <NOP> 
+"Do
+map <c-d> <ESC>:Do
 
-" CTRL-X and SHIFT-Del are Cut
-vnoremap <c-x> "+x <Esc><Insert>
-vnoremap <S-Del> "+x
+"***************************************************************************
+" Sourced files
+"***************************************************************************
+source ~/.vim/cscope.vim
+
+"****************************************************************************
+" Copy Paster Key Bindings
+" ***************************************************************************
+" CTRL-X for cutting in visual mode
+vnoremap <c-x>   "+x <Esc><Insert>
+" dd for cutting in insert mode
+imap     dd      <Esc>dd<Insert>
 
 " CTRL-C and CTRL-Insert are Copy
-vnoremap <c-c> "+y <Esc><Insert>
+vnoremap <c-c>      "+y <Esc><Insert>
 vnoremap <C-Insert> "+y <Esc><Insert>
 
-" CTRL-V and SHIFT-Insert are Paste; g cursor
-map <C-V> "+gP
-map <S-Insert> "+gP
+" CTRL-V for paste in normal and insert mode; also toggle paste mode before
+" and after pasting.
+map  <C-V>  <F3>"+p<F3><Insert>
+imap <C-V>  <Esc><F3>"+p<F3><Insert>
 
-imap <C-V> <C-R>+
-
-cmap <C-V> <C-R>+
+" CTRL-V for paste in command mode
+cmap <C-V>      <C-R>+
 cmap <S-Insert> <C-R>+
 
-"Do
-map <c-d> <ESC>:Do 
+"****************************************************************************
+" Mode Key Bindings
+" ***************************************************************************
+" Replace jj with ESC
+imap  jj  <Esc>
+nmap  jj  <Esc><Insert>
+" Replace ss with Esc
+imap  ss  <Esc>
+nmap  ss  <Esc><Insert>
+" sss For visual mode.
+imap sss <Esc>v
+nmap sss v
 
-source ~/.vim/cscope.vim
+" Activate visual mode in normal mode and Insert mode
+nmap <S-Up>   v
+nmap <S-Down> v
+imap <S-Up>   <Esc>v
+imap <S-Down> <Esc>v
+
+" these are mapped in visual mode
+vmap <S-Up>   k
+vmap <S-Down> j
+
+" activate visual mode in normal mode
+nmap <S-Left>>  v
+nmap <S-Right>  v
+
+" these are mapped in visual mode
+vmap <S-Left>  k
+vmap <S-Right> j
+
+
+if &term =~ '^screen'
+    " tmux will send xterm-style keys when its xterm-keys option is on
+    execute "set <xUp>=\e[1;*A"
+    execute "set <xDown>=\e[1;*B"
+    execute "set <xRight>=\e[1;*C"
+    execute "set <xLeft>=\e[1;*D"
+endif
+
+"****************************************************************************
+" Buffers switching Key-Bindings
+" ***************************************************************************
+"
+" Use Ctrl Arrows to shift between buffers.
+nmap <silent> <C-Up>    :wincmd k<CR>
+nmap <silent> <C-Down>  :wincmd j<CR>
+nmap <silent> <C-Left>  :wincmd h<CR>
+nmap <silent> <C-Right> :wincmd l<CR>
+
+
+
 "*****************************************************************************
 "" Functions
 "*****************************************************************************
@@ -598,7 +615,10 @@ nnoremap <silent> <leader><space> :noh<cr>
 
 "" Switching windows
 
-
+"vim-trailing-whitespace'
+let g:better_whitespace_enabled=1
+let g:strip_whitespace_on_save=1
+autocmd FileType c,cpp,py,java  EnableStripWhitespaceOnSave
 
 "" Vmap for maintain Visual Mode after shifting > and <
 vmap < <gv
