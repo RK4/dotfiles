@@ -31,7 +31,6 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 
-
 "*****************************************************************************
 "" Plug install packages
 "*****************************************************************************
@@ -73,9 +72,6 @@ Plugin 'ntpeters/vim-better-whitespace'
 " Closing in insert mode
 Plugin 'Raimondi/delimitMate'
 
-" Syntax Checking
-Plugin 'scrooloose/syntastic'
-
 " Indent
 Plugin 'Yggdroot/indentLine'
 
@@ -84,6 +80,9 @@ Plugin 'avelino/vim-bootstrap-updater'
 
 "Language Pack
 Plugin 'sheerun/vim-polyglot'
+
+" Auto Pairs
+Plugin 'jiangmiao/auto-pairs'
 
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -136,6 +135,9 @@ Plugin 'valloric/youcompleteme'
 let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 let g:ycm_global_ycm_extra_conf = '~/.vim/extra_ycm.py'
 let g:ycm_confirm_extra_conf = 0
+let g:ycm_show_diagnostics_ui = 1
+let g:ycm_enable_diagnostic_signs = 0
+let g:ycm_enable_diagnostic_highlighting = 0
 
 
 "" Color
@@ -155,13 +157,6 @@ Plugin 'ludwig/split-manpage.vim'
 Plugin 'xolox/vim-lua-ftplugin'
 Plugin 'xolox/vim-lua-inspect'
 
-
-" python
-"" Python Bundle
-Plugin 'davidhalter/jedi-vim'
-Plugin 'raimon49/requirements.txt.vim', {'for': 'requirements'}
-
-
 "*****************************************************************************
 "*****************************************************************************
 
@@ -173,11 +168,8 @@ endif
 " All of your Plugins must be added before the following line
 call vundle#end('~/.vim/bundle')            " required
 
-
-
 " Required:
 filetype plugin indent on
-
 
 "*****************************************************************************
 "" Basic Setup
@@ -458,8 +450,6 @@ nmap <silent> <C-Down>  :wincmd j<CR>
 nmap <silent> <C-Left>  :wincmd h<CR>
 nmap <silent> <C-Right> :wincmd l<CR>
 
-
-
 "*****************************************************************************
 "" Functions
 "*****************************************************************************
@@ -567,15 +557,6 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<c-b>"
 let g:UltiSnipsEditSplit="vertical"
 
-" syntastic
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_style_error_symbol = '✗'
-let g:syntastic_style_warning_symbol = '⚠'
-let g:syntastic_auto_loc_list=1
-let g:syntastic_aggregate_errors = 1
-
 " Tagbar
 nmap <silent> <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
@@ -652,20 +633,6 @@ augroup vimrc-python
       \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 augroup END
 
-" jedi-vim
-let g:jedi#popup_on_dot = 0
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = "<leader>d"
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#show_call_signatures = "0"
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#smart_auto_mappings = 0
-
-" syntastic
-let g:syntastic_python_checkers=['python', 'flake8']
-
 " vim-airline
 let g:airline#extensions#virtualenv#enabled = 1
 
@@ -673,7 +640,6 @@ let g:airline#extensions#virtualenv#enabled = 1
 " Default highlight is better than polyglot
 let g:polyglot_disabled = ['python']
 let python_highlight_all = 1
-
 
 "*****************************************************************************
 "*****************************************************************************
