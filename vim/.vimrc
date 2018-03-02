@@ -30,6 +30,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
+ 
 
 "*****************************************************************************
 "" Plug install packages
@@ -157,6 +158,13 @@ Plugin 'ludwig/split-manpage.vim'
 Plugin 'xolox/vim-lua-ftplugin'
 Plugin 'xolox/vim-lua-inspect'
 
+
+" python
+"" Python Bundle
+Plugin 'davidhalter/jedi-vim'
+Plugin 'raimon49/requirements.txt.vim', {'for': 'requirements'}
+
+
 "*****************************************************************************
 "*****************************************************************************
 
@@ -168,8 +176,11 @@ endif
 " All of your Plugins must be added before the following line
 call vundle#end('~/.vim/bundle')            " required
 
+
+
 " Required:
 filetype plugin indent on
+
 
 "*****************************************************************************
 "" Basic Setup
