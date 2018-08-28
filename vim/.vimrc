@@ -30,7 +30,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
- 
+
 
 "*****************************************************************************
 "" Plug install packages
@@ -57,8 +57,8 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-commentary'
 
 " Git plugn
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
+"Plugin 'tpope/vim-fugitive'
+"Plugin 'airblade/vim-gitgutter'
 
 " Airline
 Plugin 'vim-airline/vim-airline'
@@ -111,11 +111,12 @@ endif
 
 if v:version >= 704
   "" Snippets
-  Plugin 'SirVer/ultisnips'
+"i  Plugin 'SirVer/ultisnips'
 endif
 
 Plugin 'honza/vim-snippets'
-
+Plugin 'vobornik/vim-mql4'
+set smartindent
 " Plugin for tmux
 Plugin 'edkolev/tmuxline.vim'
 
@@ -163,13 +164,6 @@ Plugin 'ludwig/split-manpage.vim'
 "" Lua Bundle
 Plugin 'xolox/vim-lua-ftplugin'
 Plugin 'xolox/vim-lua-inspect'
-
-
-" python
-"" Python Bundle
-Plugin 'davidhalter/jedi-vim'
-Plugin 'raimon49/requirements.txt.vim', {'for': 'requirements'}
-
 
 "*****************************************************************************
 "*****************************************************************************
@@ -378,7 +372,7 @@ map <c-o> <ESC>:tabe
 
 "" For this command to work put this command in bashrc 'stty -ixon'
 " Ctrl + S to save
-imap <c-s> <ESC>:w<CR>
+imap <c-s> <ESC>:w<CR><Insert>
 map <c-s> :w<CR>
 
 " Ctrl + E to exit
@@ -407,9 +401,6 @@ source ~/.vim/cscope.vim
 " ***************************************************************************
 " CTRL-X for cutting in visual mode
 vnoremap <c-x>   "+x <Esc><Insert>
-" dd for cutting in insert mode
-imap     dd      <Esc>dd<Insert>
-
 " CTRL-C and CTRL-Insert are Copy
 vnoremap <c-c>      "+y <Esc><Insert>
 vnoremap <C-Insert> "+y <Esc><Insert>
@@ -427,34 +418,12 @@ cmap <S-Insert> <C-R>+
 " Mode Key Bindings
 " ***************************************************************************
 " Replace jj with ESC
-imap  jj  <Esc>
 nmap  jj  <Esc><Insert>
-" Replace ss with Esc
-imap  ss  <Esc>
-nmap  ss  <Esc><Insert>
-" sss For visual mode.
-imap sss <Esc>v
-nmap sss v
-
+imap  jj  <Esc>
+imap  kk  <Esc>v
+nmap  kk  <Esc>v
+vmap  kk  <Esc>i
 imap <S-:> <Esc>:
-
-" Activate visual mode in normal mode and Insert mode
-nmap <S-Up>   v
-nmap <S-Down> v
-imap <S-Up>   <Esc>v
-imap <S-Down> <Esc>v
-
-" these are mapped in visual mode
-vmap <S-Up>   k
-vmap <S-Down> j
-
-" activate visual mode in normal mode
-nmap <S-Left>>  v
-nmap <S-Right>  v
-
-" these are mapped in visual mode
-vmap <S-Left>  k
-vmap <S-Right> j
 
 " Ctrl-z to undo
 nmap <c-z> :earlier<CR>
