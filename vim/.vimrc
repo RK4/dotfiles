@@ -140,6 +140,12 @@ let g:ycm_show_diagnostics_ui = 1
 let g:ycm_enable_diagnostic_signs = 0
 let g:ycm_enable_diagnostic_highlighting = 0
 
+" Undo Tree
+Plugin 'mbbill/undotree'
+if has("persistent_undo")
+    set undodir=~/.undodir/
+    set undofile
+endif
 
 "" Color
 "Plugin 'tomasr/molokai'
@@ -370,8 +376,11 @@ map <TAB> <ESC>:tabn<CR>
 map <c-m> <ESC>:tabe<CR><c-n>
 map <c-o> <ESC>:tabe
 
+"" For this command to work put this command in bashrc 'stty -ixon'
 " Ctrl + S to save
-map <c-s> <ESC>:w<CR>
+imap <c-s> <ESC>:w<CR>
+map <c-s> :w<CR>
+
 " Ctrl + E to exit
 map <c-e> jj<ESC>:wq<CR>
 
@@ -384,6 +393,9 @@ map <CR> <ESC>:
 
 "Do
 map <c-d> <ESC>:Do
+
+"" Unset Suspend. Prevents Ctrl-Z
+"unset suspend
 
 "***************************************************************************
 " Sourced files
@@ -424,6 +436,8 @@ nmap  ss  <Esc><Insert>
 imap sss <Esc>v
 nmap sss v
 
+imap <S-:> <Esc>:
+
 " Activate visual mode in normal mode and Insert mode
 nmap <S-Up>   v
 nmap <S-Down> v
@@ -442,6 +456,10 @@ nmap <S-Right>  v
 vmap <S-Left>  k
 vmap <S-Right> j
 
+" Ctrl-z to undo
+nmap <c-z> :earlier<CR>
+imap <c-z> <Esc>:earlier<CR>
+nnoremap <F5> :UndotreeToggle<cr>
 
 if &term =~ '^screen'
     " tmux will send xterm-style keys when its xterm-keys option is on

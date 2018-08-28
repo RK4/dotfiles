@@ -1,0 +1,17 @@
+diff --git a/scripts/helpers.sh b/scripts/helpers.sh
+index 7e57358..260bf33 100644
+--- a/scripts/helpers.sh
++++ b/scripts/helpers.sh
+@@ -6,10 +6,10 @@
+ yank_pane_pwd="Y"
+ yank_pane_pwd_option="@yank_pane_pwd"
+ 
+-yank_default="y"
++yank_default="c"
+ yank_option="@copy_mode_yank"
+ 
+-put_default="Y"
++put_default="C"
+ put_option="@copy_mode_put"
+ 
+ yank_put_default="M-y"
